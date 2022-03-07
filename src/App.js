@@ -3,6 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Confirmation from "./pages/Confirmation";
+import Payment from "./pages/Payment";
+import Shipping from "./pages/Shipping";
+import UserInformation from "./pages/UserInformation";
 
 import * as api from "./api";
 
@@ -182,6 +186,18 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/checkout/order-summary" exact>
+          <Confirmation />
+        </Route>
+        <Route path="/checkout/step-3" exact>
+          <Payment />
+        </Route>
+        <Route path="/checkout/step-2" exact>
+          <Shipping />
+        </Route>
+        <Route path="/checkout/step-1" exact>
+          <UserInformation />
+        </Route>
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
