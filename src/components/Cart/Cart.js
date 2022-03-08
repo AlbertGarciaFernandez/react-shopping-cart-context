@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -50,9 +49,11 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Link to="/checkout/step-1">
-                <Button>Checkout</Button>
-              </Link>
+              {cartItems.length > 0 && (
+                <Link className="btn btn-primary" to="/checkout/step-1">
+                  Checkout
+                </Link>
+              )}
             </div>
           </div>
         </div>
