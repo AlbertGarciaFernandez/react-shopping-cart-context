@@ -7,7 +7,7 @@ import Confirmation from "./pages/Confirmation";
 import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
-import CartContext from "./context/cart-context";
+import StateProvider from "./context/state-context";
 
 import * as api from "./api";
 
@@ -185,20 +185,20 @@ function App() {
   }
 
   return (
-    <CartContext.Provider value={{ cartItems: cartItems }}>
+    <StateProvider>
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/order-summary" exact>
-            <Confirmation />
+            <Confirmation cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-3" exact>
-            <Payment />
+            <Payment cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-2" exact>
-            <Shipping />
+            <Shipping cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-1" exact>
-            <UserInformation />
+            <UserInformation cartItems={cartItems} />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />
@@ -221,7 +221,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </CartContext.Provider>
+    </StateProvider>
   );
 }
 

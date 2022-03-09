@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
+import formHeader from "../../hoc/formHeader";
 
 import Input from "../Input";
-import Button from "../Button";
+//import Button from "../Button";
 
 import clientSchema from "./client-schema";
 
@@ -102,6 +103,7 @@ function NewClientForm({ saveNewClient }) {
           hasErrorMessage={formik.touched.clientPhone}
           errorMessage={formik.errors.clientPhone}
         />
+        {/*
         <Input
           type="text"
           label="Address*"
@@ -197,7 +199,7 @@ function NewClientForm({ saveNewClient }) {
           disabled={formik.isValidating || !formik.isValid}
         >
           {formik.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+  </Button>*/}
       </form>
 
       {hasSubmitted && <Redirect to="/" />}
@@ -205,4 +207,4 @@ function NewClientForm({ saveNewClient }) {
   );
 }
 
-export default NewClientForm;
+export default formHeader(NewClientForm);

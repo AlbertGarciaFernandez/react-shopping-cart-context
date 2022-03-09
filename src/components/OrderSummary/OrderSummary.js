@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 
-// import ShoppingCartItem from "../ShoppingCartItem";
 import SummaryItem from "../SummaryItem";
 
-import CartContext from "../../context/cart-context";
+import { StateContext } from "../../context/state-context";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -11,8 +10,12 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function OrderSummary({ ...props }) {
-  const { cartItems } = useContext(CartContext);
+function OrderSummary({ cartItems, ...props }) {
+  const [state, dispatch] = useContext(StateContext);
+
+  console.log(cartItems);
+  console.log(dispatch);
+  console.log(state);
   return (
     <aside {...props}>
       <div className="row flex-column">
