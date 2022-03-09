@@ -7,6 +7,7 @@ import Confirmation from "./pages/Confirmation";
 import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
+import CartContext from "./context/cart-context";
 
 import * as api from "./api";
 
@@ -184,41 +185,43 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/checkout/order-summary" exact>
-          <Confirmation />
-        </Route>
-        <Route path="/checkout/step-3" exact>
-          <Payment />
-        </Route>
-        <Route path="/checkout/step-2" exact>
-          <Shipping />
-        </Route>
-        <Route path="/checkout/step-1" exact>
-          <UserInformation />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <CartContext.Provider value={{ cartItems: cartItems }}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/checkout/order-summary" exact>
+            <Confirmation />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <Payment />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <Shipping />
+          </Route>
+          <Route path="/checkout/step-1" exact>
+            <UserInformation />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </CartContext.Provider>
   );
 }
 
