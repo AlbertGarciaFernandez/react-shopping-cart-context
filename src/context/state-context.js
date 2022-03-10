@@ -6,7 +6,7 @@ export const StateContext = createContext();
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { cartItems, account, billing, payment, currentStep } = state;
-  console.log(cartItems, account, billing, payment, currentStep);
+
   return (
     // <StateContext.Provider value={[state, dispatch]}>
     <StateContext.Provider

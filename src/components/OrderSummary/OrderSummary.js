@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import SummaryItem from "../SummaryItem";
 
 import { StateContext } from "../../context/state-context";
@@ -10,12 +9,10 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function OrderSummary({ cartItems, ...props }) {
-  const [state, dispatch] = useContext(StateContext);
+function OrderSummary({ ...props }) {
+  const value = useContext(StateContext);
+  const { cartItems } = value;
 
-  console.log(cartItems);
-  console.log(dispatch);
-  console.log(state);
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -27,7 +24,6 @@ function OrderSummary({ cartItems, ...props }) {
           cartItems.map((item) => (
             <SummaryItem
               key={item.id}
-              id={item.id}
               title={item.title}
               price={item.price}
               img={item.img}
@@ -37,6 +33,18 @@ function OrderSummary({ cartItems, ...props }) {
         <div className="col shopping__cart__footer">
           <div className="row row-cols-1 flex-column">
             <div className="col">
+              {/* <div className="d-flex justify-content-between">
+                <h6 className="h6">Subtotal</h6>
+                <h6 className="h6">{getCartTotal(cartItems)}€</h6>
+              </div> */}
+              {/* <div className="d-flex justify-content-between">
+                <h6 className="h6">Tax</h6>
+                <h6 className="h6">0€</h6>
+              </div> */}
+              {/* <div className="d-flex justify-content-between">
+                <h6 className="h6">Shipping</h6>
+                <h6 className="h6">0€</h6>
+              </div> */}
               <div className="d-flex justify-content-between">
                 <h4 className="h5">Total</h4>
                 <h4>
