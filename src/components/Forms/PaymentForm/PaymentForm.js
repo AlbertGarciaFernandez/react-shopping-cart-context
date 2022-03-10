@@ -4,18 +4,25 @@ import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
-
+import InputCheck from "../../InputCheck";
 import Button from "../../Button";
+import Card from "../../Card";
 
 import paymentSchema from "./payment-schema";
 import { ACTIONS } from "../../../context/state-reducer";
 import { StateContext } from "../../../context/state-context";
 
+import Applepay from "../../../img/Apple-pay.svg";
+import Paypal from "../../../img/paypal.svg";
+import Visa from "../../../img/visa.svg";
+import Mcard from "../../../img/mcard.svg";
+import Amex from "../../../img/amex.svg";
+
 function PaymentForm() {
   const value = useContext(StateContext);
   const { dispatch, payment } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  // const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -85,6 +92,7 @@ function PaymentForm() {
               hasErrorMessage={formik.touched.clientPaymentForm}
               errorMessage={formik.errors.clientPaymentForm}
             />
+            <img src={Paypal} alt="Paypal" style={{ width: "100%" }} />
           </label>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label
@@ -102,11 +110,20 @@ function PaymentForm() {
               hasErrorMessage={formik.touched.clientPaymentForm}
               errorMessage={formik.errors.clientPaymentForm}
             />
+            <img src={Applepay} alt="Apple pay" style={{ width: "100%" }} />
           </label>
         </div>
         <div className="d-flex">
           <div className="w-50">
-            \
+            <div>
+              <p>We accept the following debit/credit cards</p>
+              <div className="d-flex justify-content-between mb-5">
+                <img src={Visa} alt="" className="w-25 border rounded" />
+                <img src={Mcard} alt="" className="w-25 border rounded" />
+                <img src={Amex} alt="" className="w-25 border rounded" />
+              </div>
+            </div>
+
             <Input
               type="text"
               label="Your Cardholder name*"
@@ -155,8 +172,22 @@ function PaymentForm() {
               <img alt="" />
             </div>
           </div>
-        </div>
 
+          <Card />
+          {/* NEW HERE */}
+        </div>
+        <InputCheck
+          type="checkbox"
+          label="I have read and I accept all terms and conditions"
+          id="clientConsent"
+          // checked={formik.values.clientConsent}
+          value={check}
+          placeholder=""
+          handleChange={setCheck}
+          hasErrorMessage={formik.touched.clientConsent}
+          errorMessage={formik.errors.clientConsent}
+          className=""
+        />
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <div className="d-flex justify-content-between">
           <Link className="btn btn-primary px-5" to="/checkout/step-2">
